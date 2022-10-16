@@ -1,0 +1,29 @@
+<div class="flex flex-col space-y-4">
+  <div class="flex-row flex-auto">
+    <h2>Welcome to speedtype</h2>
+  </div>
+  <div class="flex-1">
+    <app-text-preview
+      nextWords="{{ gameService.getNextWords() }}"
+      currentInput="{{ gameService.currentInputWord }}"
+      currentWord="{{ gameService.currentWord }}"
+      [submitWord]="submitEmitter"
+    ></app-text-preview>
+    <app-text-input
+      text="{{ gameService.currentWord }}"
+      (onType)="enteredText($event)"
+      [reset]="resetEmitter"
+    ></app-text-input>
+  </div>
+  <div class="flex flex-auto items-center mx-2 space-x-2">
+    <app-spinner class="flex" [spins]="isGameRunning()"></app-spinner>
+    <app-button text="Restart" (onClick)="startGame($event)">
+    </app-button>
+  </div>
+  <div>
+    <p>Last results:</p>
+    <div *ngFor="let game of gameService.pastGames">
+      <p>Speed (raw): {{game.wpm.toFixed(2)}} wpm, Accuracy: {{(game.accuracy*100).toFixed(2)}}%, Errors: {{game.errors}}</p>
+    </div>
+  </div>
+</div>

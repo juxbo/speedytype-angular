@@ -1,0 +1,14 @@
+<div class="ring p-4 my-4 rounded">
+  <p>
+    <span class="bg-gray-200"
+      ><span [ngClass]="isInputCorrect() ? 'bg-gray-300' : 'bg-red-200'">
+        <span
+          *ngFor="let charFeedback of getInputChars()"
+          [ngClass]="charFeedback.correct ? '' : 'bg-red-400'"
+          >{{ charFeedback.char }}</span
+        ></span
+      >{{ getRemainder() }}</span
+    >
+    {{ nextWords }}
+  </p>
+</div>
