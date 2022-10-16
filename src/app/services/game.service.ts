@@ -3,6 +3,9 @@ import { Game, AnalyzedGame } from '../interfaces/game';
 import { AppInputEvent, DELETE_KEY } from '../interfaces/inputEvent';
 import { TextService } from './text.service';
 
+// TODO: Configurable
+const WORD_COUNT = 30;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,7 +27,7 @@ export class GameService {
   }
 
   startGame = () => {
-    const text = this.textService.generateText(30);
+    const text = this.textService.generateText(WORD_COUNT);
     const game = {
       words: text,
       enteredText: '',
@@ -71,7 +74,7 @@ export class GameService {
   };
 
   enterText = (event: AppInputEvent) => {
-    if(!this.isRunning()) {
+    if (!this.isRunning()) {
       this.currentGame.startTs = Date.now();
     }
 
@@ -100,32 +103,35 @@ export class GameService {
 
   isRunning = () => {
     return !!(this.currentGame.startTs && !this.currentGame.endTs);
-  }
+  };
 
   endGame = () => {
     const game = this.currentGame;
 
-    if(!this.isRunning()) {
-      console.warn("Game has not started yet.")
+    if (!this.isRunning()) {
+      console.warn('Game has not started yet.');
     }
 
     game.endTs = Date.now();
     game.isDone = true;
 
-    const duration = game.endTs - (game.startTs? game.startTs : 0);
+    const duration = game.endTs - (game.startTs ? game.startTs : 0);
     const wordCount = game.words.length;
     const charCount = game.enteredText.length; //game.words.map(word => word.length).reduce((sum,x) => sum+=x) + game.words.length - 1;
-    const cpm = charCount / (duration/60000);
+    const cpm = charCount / (duration / 60000);
 
-    const inputArray = game.enteredText.split(" ");
-    const errorCount = game.words.map((word, index) => word === inputArray[index]).filter(notEqual => !notEqual).length;
+    const inputArray = game.enteredText.split(' ');
+    const errorCount = game.words
+      .map((word, index) => word === inputArray[index])
+      .filter((notEqual) => !notEqual).length;
 
-    const analyzed:AnalyzedGame = {...game,
+    const analyzed: AnalyzedGame = {
+      ...game,
       durationMs: duration,
       wordCount: wordCount,
       chars: charCount,
       errors: errorCount,
-      accuracy: 1 - errorCount/wordCount, 
+      accuracy: 1 - errorCount / wordCount,
       cpm: cpm,
       wpm: cpm / 5,
     };
