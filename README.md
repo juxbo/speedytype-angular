@@ -9,7 +9,7 @@ This is a very basic typing game prototype implementation in Angular with tailwi
 
 ### Demo
 
-![Short demo](https://i.imgur.com/PNLapss.gif | width=100)
+![This is an image](https://i.imgur.com/PNLapss.gif)
 
 ---
 
