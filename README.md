@@ -1,4 +1,17 @@
-# Speedtype
+# Speedytype-angular
+
+This is a very basic typing game prototype implementation in Angular with tailwind styling.
+
+### Features
+
+- Instant input feedback with error highlighting
+- CPM, WPM and accuracy calculation
+
+### Demo
+
+![Short demo](https://i.imgur.com/PNLapss.gif | width=100)
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
 
