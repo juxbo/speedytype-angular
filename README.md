@@ -11,6 +11,9 @@ This is a very basic typing game prototype implementation in Angular with tailwi
 
 ![This is an image](https://i.imgur.com/PNLapss.gif)
 
+[Try it out here!](https://speedytype-angular.web.app/)
+
+
 ---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
